@@ -1,0 +1,16 @@
+[
+    {
+        "id":1,
+        "maSV":121,
+        "fullname":"Temp",
+        "phonename":"0123456",
+        "email":"dasdas@gmail.com"
+    },
+    {
+        "id":2,
+        "maSV":123,
+        "fullname":"New",
+        "phonename":"01234568",
+        "email":"dasdas12@gmail.com"
+    }
+]
