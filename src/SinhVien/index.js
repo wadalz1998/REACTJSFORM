@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import Search from "./Search";
 import SinhVien from "./SinhVien";
-import ModalEdit from "./Modal";
+// import ModalEdit from "./Modal";
 import data from "./data.json";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
@@ -20,7 +20,13 @@ class Home extends Component {
         email: "",
       },
       openModal: false,
-      defaultValue: "",
+      defaultValue: {
+        id: "",
+        maSV: "",
+        fullname: "",
+        phonename: "",
+        email: "",
+      },
     };
   }
   onCloseModal = () => {
@@ -40,14 +46,9 @@ class Home extends Component {
     const date = new Date();
     const temp = { ...this.state.newSinhVien, id: date.getTime() };
     const sinhVienClone = [...this.state.sinhvien, temp];
-    this.setState(
-      {
-        sinhvien: sinhVienClone,
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
+    this.setState({
+      sinhvien: sinhVienClone,
+    });
   };
   handleDelete = (id) => {
     const sinhVienAfter = this.state.sinhvien.filter(
@@ -75,19 +76,23 @@ class Home extends Component {
   };
   handleSubmitEdit = (event) => {
     event.preventDefault();
-    // const index = this.state.sinhvien.findIndex(
-    //   (item) => item.id === this.state.defaultValue.id
-    // );
+
+    const index = this.state.sinhvien.findIndex(
+      (item) => item.id === this.state.defaultValue.id
+    );
+    const sinhVienAfterEdit = [...this.state.sinhvien];
+
+    // console.log(sinhVienAfterEdit);
     // const cloneTemp = [...this.state.sinhvien];
+    if (index !== -1) {
+      sinhVienAfterEdit[index] = this.state.defaultValue;
+    }
 
-    // if (index !== -1) {
-    //   cloneTemp[index] = this.state.defaultValue;
-    // }
-    // this.setState({
-    //   sinhvien: cloneTemp,
-    // });
+    this.setState({
+      sinhvien: sinhVienAfterEdit,
+    });
+    // console.log(this.state.sinhvien, sinhVienAfterEdit);
   };
-
   render() {
     return (
       <div className="container">
